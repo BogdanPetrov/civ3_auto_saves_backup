@@ -36,7 +36,7 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
                 f.write(s + '\n')
  
     def on_created(self, event):
-        self.log("Watchdog received created event - % s." % event.src_path)
+        self.log(now() + " Watchdog received created event - % s." % event.src_path)
         # https://stackoverflow.com/a/66066297/19383164
         wait_file(event.src_path)
         path_from = Path(event.src_path)
@@ -44,13 +44,13 @@ class Handler(watchdog.events.PatternMatchingEventHandler):
         path_to.write_bytes(path_from.read_bytes())
  
     def on_modified(self, event):
-        self.log("Watchdog received modified event - % s." % event.src_path)
+        self.log(now() + " Watchdog received modified event - % s." % event.src_path)
 
     def on_deleted(self, event):
-        self.log("Watchdog received deleted event - % s." % event.src_path)
+        self.log(now() + " Watchdog received deleted event - % s." % event.src_path)
 
     def on_moved(self, event):
-        self.log("Watchdog received moved event - % s." % event.src_path)
+        self.log(now() + " Watchdog received moved event - % s." % event.src_path)
  
  
 if __name__ == '__main__':
